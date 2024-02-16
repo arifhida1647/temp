@@ -14,16 +14,17 @@ const transporter = nodemailer.createTransport({
 });
 
 router.get("/", async (req, res, next) => {
+  const { to, subject, text } = req.query; // Menangkap parameter dari query string
+
   try {
     const info = await transporter.sendMail({
       from: {
         name: "arif",
         address: "arifhida1647@gmail.com",
       },
-      to: "sibaik1647@gmail.com",
-      subject: "Hello ✔",
-      text: "Hello world?",
-      html: "<b>Hello world?</b>",
+      to: to,
+      subject: subject,
+      text: text,
     });
 
     console.log("Message sent: %s", info.messageId);
